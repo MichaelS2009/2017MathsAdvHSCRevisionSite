@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HSC Maths Advanced - Study Sheets</title>
+    <style>
+        :root {
+            --purple: #6B4C7A;
+            --blue: #3B689E;
+            --green: #4A7C59;
+            --red: #C44536;
+            --black: #2C2C2C;
+            --cream: #F9F7F2;
+            --white: #FFFFFF;
+            --gray-light: #E8E8E8;
+            --gray: #9B9B9B;
+            --shadow: 0 2px 8px rgba(0,0,0,0.08);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--cream);
+            color: var(--black);
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: var(--white);
+            padding: 20px 0;
+            border-bottom: 3px solid var(--purple);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            color: var(--purple);
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        header p {
+            color: var(--gray);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 10px 20px;
+            background: var(--white);
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            transition: all 0.2s;
+        }
+
+        .nav-tab:hover {
+            border-color: var(--purple);
+            color: var(--purple);
+        }
+
+        .nav-tab.active {
+            background: var(--purple);
+            color: var(--white);
+            border-color: var(--purple);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 10px 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 15px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--purple);
+        }
+
+        .filter-select {
+            padding: 10px 15px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 14px;
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--purple);
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .module-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--blue);
+            transition: transform 0.2s;
+        }
+
+        .module-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .module-card h3 {
+            color: var(--purple);
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .module-card .subject {
+            color: var(--gray);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .module-card .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .module-card .status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .status.not-started {
+            background: var(--gray-light);
+            color: var(--gray);
+        }
+
+        .status.in-progress {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .status.completed {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--purple);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #5A3F6A;
+        }
+
+        .btn-secondary {
+            background: var(--gray-light);
+            color: var(--black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray);
+            color: var(--white);
+        }
+
+        .study-sheet {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .study-sheet h2 {
+            color: var(--purple);
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--purple);
+            padding-bottom: 10px;
+        }
+
+        .sheet-section {
+            margin-bottom: 25px;
+            border: 2px solid var(--gray-light);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .sheet-section-header {
+            background: var(--purple);
+            color: var(--white);
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .sheet-section-header:hover {
+            background: #5A3F6A;
+        }
+
+        .sheet-section-content {
+            padding: 20px;
+            background: var(--cream);
+        }
+
+        .sheet-section-content.hidden {
+            display: none;
+        }
+
+        .section-core .sheet-section-header { background: var(--purple); }
+        .section-formula .sheet-section-header { background: var(--blue); }
+        .section-draw .sheet-section-header { background: var(--green); }
+        .section-practical .sheet-section-header { background: var(--green); }
+        .section-traps .sheet-section-header { background: var(--red); }
+        .section-know .sheet-section-header { background: var(--gray); }
+
+        .content-list {
+            list-style: none;
+        }
+
+        .content-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gray-light);
+            font-size: 14px;
+        }
+
+        .content-list li:last-child {
+            border-bottom: none;
+        }
+
+        .content-list li strong {
+            color: var(--purple);
+        }
+
+        .formula-box {
+            background: var(--white);
+            border: 2px solid var(--blue);
+            border-radius: var(--radius);
+            padding: 15px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .formula {
+            color: var(--blue);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .formula-def {
+            color: var(--gray);
+            font-size: 13px;
+            margin-left: 20px;
+        }
+
+        .diagram-card {
+            background: var(--white);
+            border: 2px solid var(--green);
+            border-radius: var(--radius);
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .diagram-card h4 {
+            color: var(--green);
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+
+        .diagram-card ul {
+            margin-left: 20px;
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .trap-item {
+            background: #FEF2F2;
+            border-left: 4px solid var(--red);
+            padding: 10px 15px;
+            margin: 8px 0;
+            font-size: 14px;
+        }
+
+        .star {
+            color: #F59E0B;
+            font-weight: 700;
+        }
+
+        .personalisation {
+            background: var(--white);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .personalisation h3 {
+            color: var(--purple);
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .control-group label {
+            font-weight: 600;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .control-group select,
+        .control-group input[type="checkbox"] {
+            cursor: pointer;
+        }
+
+        .study-mode .container {
+            max-width: 900px;
+        }
+
+        .study-mode header,
+        .study-mode .nav-tabs,
+        .study-mode .controls,
+        .study-mode .personalisation {
+            display: none;
+        }
+
+        .study-mode .study-sheet {
+            box-shadow: none;
+            padding: 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px 0;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-top: 3px;
+            cursor: pointer;
+        }
+
+        @media print {
+            body {
+                background: white;
+                font-size: 11px;
+            }
+
+            .container {
+                max-width: 100%;
+                padding: 0;
+            }
+
+            header, .nav-tabs, .controls, .personalisation, .btn {
+                display: none !important;
+            }
+
+            .study-sheet {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .sheet-section {
+                break-inside: avoid;
+                border: 1px solid #000;
+                margin-bottom: 10px;
+            }
+
+            .sheet-section-header {
+                background: #f0f0f0 !important;
+                color: #000 !important;
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .sheet-section-content {
+                padding: 10px;
+                background: white;
+            }
+
+            .formula-box, .diagram-card {
+                border: 1px solid #000;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .modules-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .control-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .text-purple { color: var(--purple); }
+        .text-blue { color: var(--blue); }
+        .text-green { color: var(--green); }
+        .text-red { color: var(--red); }
+
+        .back-btn {
+            margin-bottom: 20px;
+        }
+
+        .coverage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .coverage-table th,
+        .coverage-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-light);
+            font-size: 14px;
+        }
+
+        .coverage-table th {
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .coverage-table tr:hover {
+            background: var(--cream);
+        }
+
+        .coverage-status {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .coverage-status.covered {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        .coverage-status.partial {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .coverage-status.revision {
+            background: var(--gray-light);
+            color: var(--gray);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>📚 HSC Mathematics Advanced</h1>
+            <p>NSW Stage 6 — Year 11 Study Sheets</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="nav-tabs">
+            <div class="nav-tab active" data-tab="dashboard">Dashboard</div>
+            <div class="nav-tab" data-tab="syllabus">Syllabus Coverage</div>
+        </div>
+
+        <div id="dashboard-tab">
+            <div class="controls">
+                <input type="text" class="search-box" id="search-modules" placeholder="Search modules...">
+                <select class="filter-select" id="filter-subject">
+                    <option value="">All Subjects</option>
+                    <option value="Mathematics Advanced">Mathematics Advanced</option>
+                </select>
+                <select class="filter-select" id="filter-status">
+                    <option value="">All Status</option>
+                    <option value="not-started">Not Started</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+
+            <div class="modules-grid" id="modules-grid"></div>
+        </div>
+
+        <div id="syllabus-tab" class="hidden">
+            <div class="study-sheet">
+                <h2>Syllabus Coverage</h2>
+                <div id="syllabus-coverage-content">
+                    <p style="color: var(--gray);">Select a module from the Dashboard to view syllabus coverage.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="study-sheet-view" class="hidden">
+            <button class="btn btn-secondary back-btn" onclick="backToDashboard()">← Back to Dashboard</button>
+
+            <div class="personalisation">
+                <h3>Personalisation</h3>
+                <div class="control-group">
+                    <label>Page Format:</label>
+                    <select id="page-format">
+                        <option value="a4-single">A4 Single-sided</option>
+                        <option value="a4-double">A4 Double-sided</option>
+                        <option value="a3-single">A3 Single-sided</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Detail Level:</label>
+                    <select id="detail-level">
+                        <option value="ultra-compact">Ultra-compact</option>
+                        <option value="standard" selected>Standard one-page</option>
+                        <option value="expanded">Expanded revision</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>
+                        <input type="checkbox" id="high-priority-only"> Show ★ high-priority only
+                    </label>
+                    <label>
+                        <input type="checkbox" id="hide-explanations"> Hide explanations (active recall)
+                    </label>
+                    <label>
+                        <input type="checkbox" id="show-checkboxes"> Show checkboxes (study mode)
+                    </label>
+                </div>
+                <div class="control-group" style="margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="window.print()">🖨️ Print / Export</button>
+                </div>
+            </div>
+
+            <div class="study-sheet" id="study-sheet-content"></div>
+        </div>
+    </div>
+
+    <script>
+        const modulesData = [{"id": 0, "subject": "Mathematics Advanced", "number": "F1", "title": "Working with Functions", "year": "Year 11", "dotPoints": 28, "status": "not-started", "coreIdeas": [{"text": "Function: set of ordered pairs (x,y) where no two pairs have same x-component (one-to-one or many-to-one)", "star": true}, {"text": "Relation: any set of ordered pairs (x,y); can be one-to-one, one-to-many, many-to-one, many-to-many", "star": true}, {"text": "Vertical line test: if any vertical line cuts graph more than once, it's not a function", "star": true}, {"text": "Domain: set of all possible x-values; Range: set of all possible y-values", "star": true}, {"text": "Interval notation: [a,b] includes endpoints; (a,b) excludes; [a,\u221e) from a to infinity", "star": true}, {"text": "Independent variable (x) vs dependent variable (y = f(x))", "star": false}, {"text": "f(x) = 0 finds x-intercepts; f(x) = k finds where graph cuts line y = k", "star": true}, {"text": "Even function: f(\u2212x) = f(x), symmetric about y-axis; Odd function: f(\u2212x) = \u2212f(x), 180\u00b0 rotational symmetry", "star": true}, {"text": "Composite function: f(g(x)) \u2014 apply g first, then f; domain restricted by both functions", "star": true}, {"text": "Sum/difference/product/quotient of functions: combine algebraically, domain is intersection", "star": false}, {"text": "Linear: f(x) = mx + c; m = gradient, c = y-intercept", "star": true}, {"text": "Quadratic: parabolic shape; vertex form y = a(x\u2212h)\u00b2 + k; turning point at (h,k)", "star": true}, {"text": "Discriminant \u0394 = b\u00b2\u22124ac: \u0394>0 two x-intercepts; \u0394=0 one (touches); \u0394<0 none", "star": true}, {"text": "Cubic forms: kx\u00b3 (origin); k(x\u2212b)\u00b3+c (translated); k(x\u2212a)(x\u2212b)(x\u2212c) (three x-intercepts)", "star": true}, {"text": "Inverse variation: f(x) = k/x \u2014 hyperbolic shape with asymptotes x=0, y=0", "star": true}, {"text": "Absolute value: |x| = distance from origin; y = |ax+b| has V-shape with vertex at x = \u2212b/a", "star": true}, {"text": "Reflections: y = \u2212f(x) (x-axis); y = f(\u2212x) (y-axis); y = \u2212f(\u2212x) (both)", "star": true}, {"text": "Circle: (x\u2212a)\u00b2 + (y\u2212b)\u00b2 = r\u00b2 \u2014 centre (a,b), radius r; not a function (fails vertical line test)", "star": true}, {"text": "Semicircle functions: y = \u221a(r\u00b2\u2212x\u00b2) (top); y = \u2212\u221a(r\u00b2\u2212x\u00b2) (bottom)", "star": true}, {"text": "Polynomial: P(x) = a\u2099x\u207f + ... + a\u2081x + a\u2080; degree = n (highest power)", "star": false}], "formulas": [{"equation": "m = (y\u2082\u2212y\u2081)/(x\u2082\u2212x\u2081)", "definition": "Gradient between two points", "condition": ""}, {"equation": "y \u2212 y\u2081 = m(x \u2212 x\u2081)", "definition": "Point-gradient form", "condition": ""}, {"equation": "f(x) = mx + c", "definition": "Linear function; m = gradient, c = y-intercept", "condition": ""}, {"equation": "m\u2081m\u2082 = \u22121", "definition": "Perpendicular lines condition", "condition": "neither vertical"}, {"equation": "x = (\u2212b \u00b1 \u221a(b\u00b2\u22124ac))/(2a)", "definition": "Quadratic formula", "condition": "ax\u00b2 + bx + c = 0"}, {"equation": "y = a(x \u2212 h)\u00b2 + k", "definition": "Vertex form; turning point (h,k)", "condition": ""}, {"equation": "\u0394 = b\u00b2 \u2212 4ac", "definition": "Discriminant; determines x-intercepts", "condition": ""}, {"equation": "f(g(x))", "definition": "Composite function; apply g first", "condition": "range of g \u2286 domain of f"}, {"equation": "(x \u2212 a)\u00b2 + (y \u2212 b)\u00b2 = r\u00b2", "definition": "Circle; centre (a,b), radius r", "condition": ""}, {"equation": "y \u2212 y\u2081 = [(y\u2082\u2212y\u2081)/(x\u2082\u2212x\u2081)](x \u2212 x\u2081)", "definition": "Two-point form", "condition": "x\u2081 \u2260 x\u2082"}], "diagrams": [{"title": "Function vs Relation", "draw": "Mapping diagrams showing one-to-one, many-to-one (functions) vs one-to-many (not function)", "labels": "Domain set, Range set, arrows", "shows": "Visual distinction between functions and non-functions"}, {"title": "Vertical Line Test", "draw": "Graph with vertical line cutting at multiple points", "labels": "x-axis, y-axis, vertical line, intersection points", "shows": "Why some relations fail the function test"}, {"title": "Linear Graph", "draw": "Straight line with gradient triangle", "labels": "y = mx + c, m = rise/run, c at y-intercept", "shows": "Geometric meaning of m and c"}, {"title": "Quadratic Parabola", "draw": "Parabola showing vertex, axis of symmetry, intercepts", "labels": "Turning point (h,k), axis x = h, x-intercepts, y-intercept", "shows": "Key features from vertex form"}, {"title": "Discriminant Cases", "draw": "Three parabolas: two x-intercepts, one (touching), none", "labels": "\u0394 > 0, \u0394 = 0, \u0394 < 0", "shows": "Relationship between \u0394 and graph position"}, {"title": "Cubic Graphs", "draw": "Three cubic forms: kx\u00b3, translated, factored form", "labels": "Inflection point, x-intercepts a,b,c", "shows": "How equation form affects shape"}, {"title": "Hyperbola y = k/x", "draw": "Two-branched hyperbola with asymptotes", "labels": "x = 0 (y-axis), y = 0 (x-axis) as dashed lines", "shows": "Asymptotic behaviour of inverse variation"}, {"title": "Absolute Value V-Shape", "draw": "V-shaped graph of y = |ax+b|", "labels": "Vertex at x = \u2212b/a, slopes \u00b1a", "shows": "Reflection of negative portion above x-axis"}, {"title": "Circle and Semicircles", "draw": "Circle with centre (a,b) and two semicircle functions", "labels": "Centre, radius r, y = \u00b1\u221a(r\u00b2\u2212x\u00b2)", "shows": "Why circle isn't a function but semicircles are"}], "practicals": [{"aim": "Investigate break-even point for a simple business", "iv": "Number of items sold (x)", "dv": "Revenue and cost (dollars)", "controls": "Fixed costs, variable cost per unit, selling price", "graph": "Two lines (revenue and cost); intersection = break-even point", "limitations": "Assumes linear relationships; ignores market demand changes; fixed costs may vary at scale", "improvement": "Use real business data to test model accuracy"}, {"aim": "Model and solve simultaneous linear/quadratic systems", "iv": "Choice of equations (varied coefficients)", "dv": "Number and nature of solutions", "controls": "Solution method (algebraic vs graphical)", "graph": "Line cutting parabola at 0, 1, or 2 points", "limitations": "Graphical method limited by drawing accuracy; algebraic errors in substitution", "improvement": "Use technology to verify solutions"}], "traps": ["Confusing relation with function \u2014 remember: function requires unique y for each x", "Forgetting domain restrictions on quotient f(x)/g(x) \u2014 g(x) \u2260 0", "Mixing up domain and range \u2014 domain is x-values (input), range is y-values (output)", "Incorrect interval notation \u2014 [ ] includes, ( ) excludes; infinity always gets ( )", "Perpendicular gradient error \u2014 m\u2081m\u2082 = \u22121, not m\u2081 = \u2212m\u2082", "Discriminant misinterpretation \u2014 \u0394 tells x-intercepts, not y-intercept", "Composite function order \u2014 f(g(x)) means g first, then f (opposite of reading order)", "Circle equation sign errors \u2014 (x\u2212a)\u00b2 means centre at x = +a (opposite sign)", "Absolute value solving \u2014 |ax+b| = k gives TWO equations: ax+b = k AND ax+b = \u2212k", "Forgetting circle is not a function \u2014 fails vertical line test", "Parallel vs perpendicular \u2014 parallel: same gradient; perpendicular: product = \u22121", "Vertex form confusion \u2014 y = a(x\u2212h)\u00b2+k has vertex at (h,k), not (\u2212h,k)"], "knowButDontWrite": ["Formal set-builder notation for domain/range", "Detailed proof of quadratic formula", "Historical development of function concept", "Complex number solutions to quadratics (Extension 1)", "Polynomial long division algorithm", "Parametric representations of relations", "Piecewise-defined functions beyond absolute value", "Transformations of cubics beyond basic forms"], "syllabusPoints": [{"text": "Use index laws and surds", "status": "covered", "section": "Core Ideas (algebraic foundation)"}, {"text": "Solve quadratic equations using quadratic formula and completing square", "status": "covered", "section": "Formula Box"}, {"text": "Manipulate complex algebraic expressions with algebraic fractions", "status": "covered", "section": "Core Ideas (quotient of functions)"}, {"text": "Define and use function and relation as mappings between sets", "status": "covered", "section": "Core Ideas"}, {"text": "Define relation as set of ordered pairs (x,y)", "status": "covered", "section": "Core Ideas"}, {"text": "Formal definition of function: no two ordered pairs with same x-component", "status": "covered", "section": "Core Ideas \u2605"}, {"text": "Use function notation, domain, range, independent/dependent variables", "status": "covered", "section": "Core Ideas"}, {"text": "Understand and use interval notation", "status": "covered", "section": "Core Ideas"}, {"text": "Understand concept of graph of a function", "status": "covered", "section": "Draw These"}, {"text": "Identify types: one-to-one, one-to-many, many-to-one, many-to-many", "status": "covered", "section": "Core Ideas"}, {"text": "Use vertical line test to identify a function", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Determine if function is one-to-one", "status": "covered", "section": "Core Ideas"}, {"text": "Define odd and even functions algebraically and geometrically", "status": "covered", "section": "Core Ideas"}, {"text": "Define sum, difference, product, quotient of functions", "status": "covered", "section": "Core Ideas"}, {"text": "Define and use composite function f(g(x))", "status": "covered", "section": "Core Ideas + Formula Box"}, {"text": "Identify domain and range of composite function", "status": "covered", "section": "Core Ideas"}, {"text": "Recognise f(x)=0 finds x-intercepts", "status": "covered", "section": "Core Ideas \u2605"}, {"text": "Model, analyse and solve problems involving linear functions", "status": "covered", "section": "Formula Box + Practicals"}, {"text": "Explain geometrical significance of m and c in f(x)=mx+c", "status": "covered", "section": "Draw These"}, {"text": "Derive equation through fixed point: y\u2212y\u2081=m(x\u2212x\u2081)", "status": "covered", "section": "Formula Box"}, {"text": "Derive equation through two points using gradient formula", "status": "covered", "section": "Formula Box"}, {"text": "Parallel lines have same gradient; perpendicular if m\u2081m\u2082=\u22121", "status": "covered", "section": "Formula Box + Exam Traps"}, {"text": "Find equations of straight lines including parallel/perpendicular", "status": "covered", "section": "Formula Box"}, {"text": "Recognise features of quadratic graph: parabolic, turning point, axis, intercepts", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Find vertex and intercepts by factorising, completing square, or quadratic formula", "status": "covered", "section": "Formula Box"}, {"text": "Understand role of discriminant in relation to graph position", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Find equation of quadratic given sufficient information", "status": "covered", "section": "Formula Box"}, {"text": "Solve simultaneous linear/quadratic problems including break-even", "status": "covered", "section": "Practicals"}, {"text": "Understand f(x)=k finds where graph cuts y=k", "status": "covered", "section": "Core Ideas"}, {"text": "Recognise cubic forms and identify important features", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Define real polynomial and identify coefficients and degree", "status": "covered", "section": "Know but Don't Write"}, {"text": "Identify shape and features of polynomial graphs in factored form", "status": "covered", "section": "Core Ideas (cubic)"}, {"text": "Recognise f(x)=k/x as inverse variation with hyperbolic shape and asymptotes", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Define absolute value |x| and graph y=|x|", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Recognise shape of y=|ax+b| and sketch", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Solve |ax+b|=k algebraically and graphically", "status": "covered", "section": "Exam Traps"}, {"text": "Sketch y=\u2212f(x), y=f(\u2212x), y=\u2212f(\u2212x) using reflections", "status": "covered", "section": "Core Ideas"}, {"text": "Recognise features of x\u00b2+y\u00b2=r\u00b2 and (x\u2212a)\u00b2+(y\u2212b)\u00b2=r\u00b2", "status": "covered", "section": "Core Ideas + Formula Box + Draw These"}, {"text": "Derive circle equation using Pythagoras; recognise circle is not a function", "status": "covered", "section": "Core Ideas \u2605 + Exam Traps"}, {"text": "Transform x\u00b2+y\u00b2+ax+by+c=0 to standard form by completing square", "status": "covered", "section": "Formula Box"}, {"text": "Sketch circles and find equation from graph", "status": "covered", "section": "Draw These"}, {"text": "Recognise y=\u00b1\u221a(r\u00b2\u2212x\u00b2) as semicircle functions", "status": "covered", "section": "Core Ideas + Draw These"}]}, {"id": 1, "subject": "Mathematics Advanced", "number": "T1", "title": "Trigonometry and Measure of Angles", "year": "Year 11", "dotPoints": 18, "status": "not-started", "coreIdeas": [{"text": "SOH CAH TOA: sin \u03b8 = O/H, cos \u03b8 = A/H, tan \u03b8 = O/A (right-angled triangles only)", "star": true}, {"text": "Sine rule: a/sin A = b/sin B = c/sin C \u2014 use when given AAS or SSA", "star": true}, {"text": "Cosine rule: a\u00b2 = b\u00b2 + c\u00b2 \u2212 2bc cos A \u2014 use when given SAS or SSS", "star": true}, {"text": "Area of triangle: Area = \u00bdab sin C \u2014 use when given two sides and included angle", "star": true}, {"text": "Ambiguous case (SSA): two possible triangles when given angle is acute and opposite side < adjacent side", "star": true}, {"text": "Unit circle: circle radius 1 centred at origin; sin \u03b8 = y-coordinate, cos \u03b8 = x-coordinate", "star": true}, {"text": "Radians: 360\u00b0 = 2\u03c0 rad; 180\u00b0 = \u03c0 rad; convert: rad = deg \u00d7 \u03c0/180, deg = rad \u00d7 180/\u03c0", "star": true}, {"text": "Exact values: memorise for \u03c0/6 (30\u00b0), \u03c0/4 (45\u00b0), \u03c0/3 (60\u00b0) in both degrees and radians", "star": true}, {"text": "Angles of any magnitude: use ASTC (All-Sin-Tan-Cos) to determine sign in each quadrant", "star": true}, {"text": "Periodicity: sin(\u03b8 + 360\u00b0) = sin \u03b8; cos(\u03b8 + 360\u00b0) = cos \u03b8; tan(\u03b8 + 180\u00b0) = tan \u03b8", "star": true}, {"text": "Arc length: l = r\u03b8 \u2014 \u03b8 must be in radians", "star": true}, {"text": "Sector area: A = \u00bdr\u00b2\u03b8 \u2014 \u03b8 must be in radians", "star": true}, {"text": "Graphs: y = sin x and y = cos x have amplitude 1, period 360\u00b0 (2\u03c0); y = tan x has period 180\u00b0 (\u03c0), asymptotes", "star": true}, {"text": "Bearings: true bearing measured clockwise from north (000\u00b0 to 360\u00b0); compass bearing uses N/S first", "star": true}, {"text": "Angle of elevation: angle above horizontal; depression: angle below horizontal", "star": true}, {"text": "3D trigonometry: draw 2D cross-sections to isolate right-angled triangles", "star": false}], "formulas": [{"equation": "sin \u03b8 = O/H, cos \u03b8 = A/H, tan \u03b8 = O/A", "definition": "Basic trig ratios", "condition": "right-angled triangle only"}, {"equation": "a/sin A = b/sin B = c/sin C", "definition": "Sine rule", "condition": "any triangle"}, {"equation": "a\u00b2 = b\u00b2 + c\u00b2 \u2212 2bc cos A", "definition": "Cosine rule (for sides)", "condition": "any triangle"}, {"equation": "cos A = (b\u00b2 + c\u00b2 \u2212 a\u00b2)/(2bc)", "definition": "Cosine rule (for angles)", "condition": "any triangle"}, {"equation": "Area = \u00bdab sin C", "definition": "Area of triangle", "condition": "two sides and included angle"}, {"equation": "l = r\u03b8", "definition": "Arc length", "condition": "\u03b8 in radians"}, {"equation": "A = \u00bdr\u00b2\u03b8", "definition": "Sector area", "condition": "\u03b8 in radians"}, {"equation": "\u03b8 (rad) = \u03b8 (deg) \u00d7 \u03c0/180", "definition": "Degrees to radians", "condition": ""}, {"equation": "\u03b8 (deg) = \u03b8 (rad) \u00d7 180/\u03c0", "definition": "Radians to degrees", "condition": ""}, {"equation": "tan \u03b8 = m", "definition": "Gradient and angle of inclination", "condition": "\u03b8 with positive x-axis"}], "diagrams": [{"title": "Right-Angled Triangle Labelling", "draw": "Triangle with right angle, angle \u03b8, sides labelled O, A, H", "labels": "Opposite (across from \u03b8), Adjacent (next to \u03b8), Hypotenuse (longest, opposite right angle)", "shows": "Correct labelling for SOH CAH TOA"}, {"title": "Unit Circle", "draw": "Circle radius 1 with angle \u03b8 in standard position", "labels": "Centre O, point P(x,y), x = cos \u03b8, y = sin \u03b8, radius = 1", "shows": "Definition of sin and cos for any angle"}, {"title": "ASTC Quadrant Diagram", "draw": "Four quadrants with A (all +), S (sin +), T (tan +), C (cos +)", "labels": "Quadrant I: A, II: S, III: T, IV: C; axes labelled", "shows": "Which trig functions are positive in each quadrant"}, {"title": "Sine Rule Ambiguous Case", "draw": "Two possible triangles from same SSA information", "labels": "Given angle A, side a (opposite), side b (adjacent); two positions for side a", "shows": "Why SSA can give two solutions"}, {"title": "Arc and Sector", "draw": "Circle sector with centre, radius r, arc length l, angle \u03b8", "labels": "Centre O, radius r, arc length l, angle \u03b8 (radians)", "shows": "Geometric meaning of l = r\u03b8 and A = \u00bdr\u00b2\u03b8"}, {"title": "Trig Graphs (0 to 2\u03c0)", "draw": "Three separate graphs: sin x, cos x, tan x", "labels": "x-axis in radians (0, \u03c0/2, \u03c0, 3\u03c0/2, 2\u03c0), y-axis \u22121 to 1 (tan: asymptotes)", "shows": "Periodicity, amplitude, asymptotes of tan"}, {"title": "Angle of Elevation/Depression", "draw": "Horizontal line with angle above (elevation) and below (depression)", "labels": "Horizontal, line of sight, angle \u03b8, object position", "shows": "Difference between elevation and depression"}, {"title": "True Bearing Diagram", "draw": "Compass with north at top, angle measured clockwise", "labels": "N at top, angle measured clockwise from N, bearing value 000\u00b0\u2013360\u00b0", "shows": "How true bearings are measured"}], "practicals": [{"aim": "Measure height of inaccessible object using trigonometry", "iv": "Distance from object (d)", "dv": "Angle of elevation (\u03b8)", "controls": "Instrument height, ground level, measurement technique", "graph": "Calculate height h = d tan \u03b8 + instrument height", "limitations": "Ground may not be level; angle measurement error; instrument height approximation", "improvement": "Take multiple measurements from different distances and average"}, {"aim": "Investigate ambiguous case of sine rule", "iv": "Length of opposite side (a)", "dv": "Number of possible triangles (0, 1, or 2)", "controls": "Given angle A, adjacent side b", "graph": "Plot a vs number of solutions; identify boundary conditions", "limitations": "Geometric construction accuracy; measurement precision", "improvement": "Use dynamic geometry software to explore continuously"}, {"aim": "Solve 3D trigonometry problems (e.g., pyramid, prism)", "iv": "Given dimensions of 3D shape", "dv": "Calculated angles or lengths", "controls": "Method of creating 2D cross-sections", "graph": "Draw separate 2D diagrams for each triangle used", "limitations": "Difficulty visualising 3D; choosing wrong cross-section; compound errors", "improvement": "Label all known values on 3D diagram before extracting 2D triangles"}], "traps": ["Using SOH CAH TOA on non-right-angled triangles \u2014 must use sine/cosine rule instead", "Forgetting calculator in degree mode vs radian mode \u2014 check before calculating!", "Sine rule ambiguous case \u2014 always check if two solutions exist when given SSA", "Arc length/sector area formulas require radians \u2014 convert from degrees first", "Cosine rule sign error \u2014 formula has MINUS: a\u00b2 = b\u00b2 + c\u00b2 \u2212 2bc cos A", "Confusing angle of elevation with depression \u2014 elevation is above horizontal", "True bearing format \u2014 must be 3 digits (e.g., 045\u00b0 not 45\u00b0)", "Unit circle coordinates \u2014 cos \u03b8 = x, sin \u03b8 = y (not reversed)", "ASTC quadrant signs \u2014 memorise: All (I), Sin (II), Tan (III), Cos (IV)", "Exact values \u2014 must know \u03c0/6, \u03c0/4, \u03c0/3 for sin, cos, tan", "Area formula \u2014 must use INCLUDED angle between the two sides", "Gradient-angle relationship \u2014 tan \u03b8 = m, not sin \u03b8 = m", "Periodicity \u2014 sin and cos period 360\u00b0 (2\u03c0); tan period 180\u00b0 (\u03c0)", "Forgetting tan \u03b8 undefined at 90\u00b0, 270\u00b0 (asymptotes on graph)"], "knowButDontWrite": ["Proof of sine rule using altitude", "Proof of cosine rule using Pythagoras", "Derivation of arc length formula from circumference proportion", "Historical development of radian measure", "Exact values for 18\u00b0, 36\u00b0, 72\u00b0 (Extension 1)", "Reciprocal trig functions (cosec, sec, cot) \u2014 Year 11 MA-T2 only", "Trigonometric identities proofs \u2014 Year 11 MA-T2 only", "3D coordinate geometry applications"], "syllabusPoints": [{"text": "Use sine, cosine, tangent ratios for right-angled triangles (degrees or deg/min)", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Establish and use sine rule, cosine rule, area formula (degrees or deg/min)", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Find angles and sides involving ambiguous case of sine rule", "status": "covered", "section": "Core Ideas + Practicals + Exam Traps"}, {"text": "Use technology/geometric construction to investigate ambiguous case", "status": "covered", "section": "Practicals + Draw These"}, {"text": "Solve problems involving trigonometry in 2D and 3D", "status": "covered", "section": "Practicals + Exam Traps"}, {"text": "Interpret 2D/3D context from diagrams or written form; construct diagrams", "status": "covered", "section": "Draw These + Practicals"}, {"text": "Solve practical problems with Pythagoras and trig, including angles of elevation/depression, bearings", "status": "covered", "section": "Core Ideas + Practicals + Draw These"}, {"text": "Understand unit circle definition of sin \u03b8, cos \u03b8, tan \u03b8 and periodicity (degrees)", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Sketch trig functions in degrees for 0\u00b0 \u2264 x \u2264 360\u00b0", "status": "covered", "section": "Draw These"}, {"text": "Define and use radian measure; understand relationship with degrees", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Convert between degrees and radians (360\u00b0 = 2\u03c0)", "status": "covered", "section": "Formula Box"}, {"text": "Recognise and use exact values for multiples of \u03c0/6 and \u03c0/4 (degrees and radians)", "status": "covered", "section": "Core Ideas \u2605 + Exam Traps"}, {"text": "Understand unit circle definition using radians", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Solve problems involving trig ratios of angles of any magnitude (degrees and radians)", "status": "covered", "section": "Core Ideas (ASTC) + Exam Traps"}, {"text": "Recognise and sketch y = sin x, y = cos x, y = tan x on extended domains", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Derive and use arc length formula l = r\u03b8", "status": "covered", "section": "Core Ideas + Formula Box + Draw These"}, {"text": "Derive and use sector area formula A = \u00bdr\u00b2\u03b8", "status": "covered", "section": "Core Ideas + Formula Box + Draw These"}, {"text": "Solve problems involving sector areas, arc lengths, combinations", "status": "covered", "section": "Practicals + Exam Traps"}]}, {"id": 2, "subject": "Mathematics Advanced", "number": "T2", "title": "Trigonometric Functions and Identities", "year": "Year 11", "dotPoints": 12, "status": "not-started", "coreIdeas": [{"text": "Reciprocal functions: cosec x = 1/sin x; sec x = 1/cos x; cot x = cos x/sin x = 1/tan x", "star": true}, {"text": "Reciprocal graphs: vertical asymptotes where original function = 0; no x-intercepts", "star": true}, {"text": "Pythagorean identities: sin\u00b2x + cos\u00b2x = 1; 1 + tan\u00b2x = sec\u00b2x; 1 + cot\u00b2x = cosec\u00b2x", "star": true}, {"text": "Quotient identity: tan x = sin x/cos x (provided cos x \u2260 0)", "star": true}, {"text": "Equation vs identity: equation true for specific x; identity true for all x in domain", "star": true}, {"text": "Proving identities: work on one side only (usually more complex), or simplify both sides to same expression", "star": true}, {"text": "Complementary angle results: sin(90\u00b0\u2212\u03b8) = cos \u03b8; cos(90\u00b0\u2212\u03b8) = sin \u03b8; tan(90\u00b0\u00b0\u2212\u03b8) = cot \u03b8", "star": true}, {"text": "Solving trig equations: find all solutions in given domain; use symmetry and periodicity", "star": true}, {"text": "Quadratic trig equations: factorise or use quadratic formula, then solve for x", "star": true}, {"text": "Domain restrictions: sin x \u2260 0 for cosec x and cot x; cos x \u2260 0 for sec x and tan x", "star": true}, {"text": "Exact value evaluation: use unit circle, special triangles, and identities", "star": false}, {"text": "Simplification strategies: convert to sin/cos; factorise; use identities to reduce terms", "star": true}], "formulas": [{"equation": "cosec x = 1/sin x", "definition": "Reciprocal of sine", "condition": "sin x \u2260 0"}, {"equation": "sec x = 1/cos x", "definition": "Reciprocal of cosine", "condition": "cos x \u2260 0"}, {"equation": "cot x = cos x/sin x = 1/tan x", "definition": "Reciprocal of tangent", "condition": "sin x \u2260 0"}, {"equation": "sin\u00b2x + cos\u00b2x = 1", "definition": "Fundamental Pythagorean identity", "condition": "all x"}, {"equation": "1 + tan\u00b2x = sec\u00b2x", "definition": "Pythagorean identity (divide by cos\u00b2)", "condition": "cos x \u2260 0"}, {"equation": "1 + cot\u00b2x = cosec\u00b2x", "definition": "Pythagorean identity (divide by sin\u00b2)", "condition": "sin x \u2260 0"}, {"equation": "tan x = sin x/cos x", "definition": "Quotient identity", "condition": "cos x \u2260 0"}, {"equation": "sin(90\u00b0 \u2212 \u03b8) = cos \u03b8", "definition": "Complementary angle", "condition": ""}, {"equation": "cos(90\u00b0 \u2212 \u03b8) = sin \u03b8", "definition": "Complementary angle", "condition": ""}, {"equation": "tan(90\u00b0 \u2212 \u03b8) = cot \u03b8", "definition": "Complementary angle", "condition": ""}], "diagrams": [{"title": "Reciprocal Graph Relationships", "draw": "Three pairs: sin/cosec, cos/sec, tan/cot on same axes", "labels": "Original function (solid), reciprocal (dashed), asymptotes where original = 0", "shows": "How zeros become asymptotes; peaks become minimums"}, {"title": "Unit Circle with Key Angles", "draw": "Circle showing sin, cos, tan as lengths", "labels": "sin \u03b8 = y, cos \u03b8 = x, tan \u03b8 = vertical tangent line at x=1", "shows": "Geometric meaning of trig functions and identities"}, {"title": "Pythagorean Identity Triangle", "draw": "Right triangle with hypotenuse 1, sides sin \u03b8 and cos \u03b8", "labels": "sin\u00b2\u03b8 + cos\u00b2\u03b8 = 1\u00b2", "shows": "Why sin\u00b2x + cos\u00b2x = 1 is true"}, {"title": "Trig Equation Solution Regions", "draw": "Number line or unit circle showing solution intervals", "labels": "Domain restriction, solution points, excluded values", "shows": "How to find all solutions in given domain"}], "practicals": [{"aim": "Verify Pythagorean identities numerically and graphically", "iv": "Angle \u03b8 (various values)", "dv": "Value of sin\u00b2\u03b8 + cos\u00b2\u03b8, 1 + tan\u00b2\u03b8 \u2212 sec\u00b2\u03b8, etc.", "controls": "Calculator mode (degrees/radians), precision", "graph": "Plot identity expression vs \u03b8; should equal 0 or 1", "limitations": "Calculator rounding errors; undefined values at asymptotes", "improvement": "Use exact values where possible to verify algebraically"}, {"aim": "Solve trig equations graphically and algebraically", "iv": "Equation type (linear, quadratic, reciprocal)", "dv": "Number of solutions in domain", "controls": "Domain (e.g., 0 \u2264 x \u2264 2\u03c0)", "graph": "Graph both sides; intersections are solutions", "limitations": "Graphical method limited by resolution; may miss solutions outside visible domain", "improvement": "Use algebraic method to confirm all solutions"}], "traps": ["Confusing reciprocal with inverse \u2014 cosec is 1/sin, NOT sin\u207b\u00b9 (arcsin)", "Forgetting domain restrictions \u2014 cosec and cot undefined when sin x = 0", "Sign errors in identities \u2014 1 + tan\u00b2x = sec\u00b2x (both positive)", "Dividing by zero \u2014 tan x = sin x/cos x requires cos x \u2260 0", "Losing solutions when solving \u2014 always check full domain, use symmetry", "Proving identity by assuming it's true \u2014 must manipulate one side to match other", "Forgetting complementary angle results work in radians too: sin(\u03c0/2 \u2212 \u03b8) = cos \u03b8", "Quadratic trig equations \u2014 remember to solve for the trig function FIRST, then x", "Extraneous solutions \u2014 check solutions don't make denominator zero", "Periodicity \u2014 solutions repeat every 360\u00b0 (2\u03c0) for sin/cos, 180\u00b0 (\u03c0) for tan"], "knowButDontWrite": ["Proofs of Pythagorean identities from unit circle", "Derivation of reciprocal function derivatives (Year 12)", "Historical development of trig notation", "Sum and difference formulas (Extension 1)", "Double angle formulas (Extension 1)", "t-formulae (tan half-angle substitutions)", "Complex exponential form e^(i\u03b8) = cos \u03b8 + i sin \u03b8", "Fourier series applications"], "syllabusPoints": [{"text": "Define reciprocal trig functions: cosec x, sec x, cot x", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Sketch graphs of reciprocal trig functions (radians and degrees)", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Prove and apply Pythagorean identities: sin\u00b2x+cos\u00b2x=1, 1+tan\u00b2x=sec\u00b2x, 1+cot\u00b2x=cosec\u00b2x", "status": "covered", "section": "Core Ideas \u2605 + Formula Box + Practicals"}, {"text": "Know difference between equation and identity", "status": "covered", "section": "Core Ideas"}, {"text": "Use tan x = sin x/cos x (provided cos x \u2260 0)", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Prove trigonometric identities", "status": "covered", "section": "Core Ideas + Practicals + Exam Traps"}, {"text": "Evaluate trig expressions using angles of any magnitude and complementary angle results", "status": "covered", "section": "Core Ideas + Formula Box"}, {"text": "Simplify trig expressions and solve trig equations (including quadratic)", "status": "covered", "section": "Core Ideas + Practicals + Exam Traps"}]}, {"id": 3, "subject": "Mathematics Advanced", "number": "C1", "title": "Introduction to Differentiation", "year": "Year 11", "dotPoints": 22, "status": "not-started", "coreIdeas": [{"text": "Continuous function: no breaks, gaps, or jumps in graph; can draw without lifting pen", "star": true}, {"text": "Gradient of tangent = instantaneous rate of change = derivative at that point", "star": true}, {"text": "Difference quotient: [f(x+h)\u2212f(x)]/h = average rate of change = gradient of secant", "star": true}, {"text": "Derivative from first principles: f\u2032(x) = lim(h\u21920) [f(x+h)\u2212f(x)]/h", "star": true}, {"text": "Notation: dy/dx = f\u2032(x) = y\u2032 \u2014 all mean derivative of y with respect to x", "star": true}, {"text": "Power rule: d/dx(x\u207f) = nx\u207f\u207b\u00b9 for all real n", "star": true}, {"text": "f\u2032(x) > 0 \u2192 function increasing; f\u2032(x) < 0 \u2192 decreasing; f\u2032(x) = 0 \u2192 stationary point", "star": true}, {"text": "Gradient function (derivative graph): plot f\u2032(x) values against x", "star": true}, {"text": "Displacement s(t) \u2192 velocity v(t) = ds/dt \u2192 acceleration a(t) = dv/dt = d\u00b2s/dt\u00b2", "star": true}, {"text": "Tangent: line touching curve at one point with same gradient; Normal: perpendicular to tangent", "star": true}, {"text": "Product rule: d/dx(uv) = u(dv/dx) + v(du/dx)", "star": true}, {"text": "Quotient rule: d/dx(u/v) = [v(du/dx) \u2212 u(dv/dx)]/v\u00b2", "star": true}, {"text": "Chain rule: dy/dx = (dy/du) \u00d7 (du/dx) for composite functions y = f(g(x))", "star": true}, {"text": "Constant multiple: d/dx(kf(x)) = k\u00b7f\u2032(x); Sum/difference: d/dx(f \u00b1 g) = f\u2032 \u00b1 g\u2032", "star": true}, {"text": "Angle of inclination \u03b8: tan \u03b8 = m (gradient)", "star": false}, {"text": "Stationary points: where f\u2032(x) = 0 \u2014 can be max, min, or horizontal inflection", "star": true}], "formulas": [{"equation": "f\u2032(x) = lim(h\u21920) [f(x+h)\u2212f(x)]/h", "definition": "Derivative from first principles", "condition": ""}, {"equation": "d/dx(x\u207f) = nx\u207f\u207b\u00b9", "definition": "Power rule", "condition": "all real n"}, {"equation": "d/dx(kf(x)) = k\u00b7f\u2032(x)", "definition": "Constant multiple rule", "condition": "k constant"}, {"equation": "d/dx(f + g) = f\u2032 + g\u2032", "definition": "Sum rule", "condition": ""}, {"equation": "d/dx(uv) = u(dv/dx) + v(du/dx)", "definition": "Product rule", "condition": "u, v functions of x"}, {"equation": "d/dx(u/v) = [v(du/dx) \u2212 u(dv/dx)]/v\u00b2", "definition": "Quotient rule", "condition": "v \u2260 0"}, {"equation": "dy/dx = (dy/du) \u00d7 (du/dx)", "definition": "Chain rule", "condition": "y = f(u), u = g(x)"}, {"equation": "v(t) = ds/dt", "definition": "Velocity from displacement", "condition": ""}, {"equation": "a(t) = dv/dt = d\u00b2s/dt\u00b2", "definition": "Acceleration from velocity", "condition": ""}, {"equation": "y \u2212 y\u2081 = f\u2032(x\u2081)(x \u2212 x\u2081)", "definition": "Tangent equation at (x\u2081,y\u2081)", "condition": ""}, {"equation": "y \u2212 y\u2081 = [\u22121/f\u2032(x\u2081)](x \u2212 x\u2081)", "definition": "Normal equation at (x\u2081,y\u2081)", "condition": "f\u2032(x\u2081) \u2260 0"}, {"equation": "tan \u03b8 = m", "definition": "Gradient and angle of inclination", "condition": "\u03b8 with positive x-axis"}], "diagrams": [{"title": "Secant Approaching Tangent", "draw": "Curve with two points connected by secant; show second point moving closer", "labels": "Points (x, f(x)) and (x+h, f(x+h)), secant gradient = [f(x+h)\u2212f(x)]/h", "shows": "How difference quotient becomes derivative as h\u21920"}, {"title": "Tangent and Normal", "draw": "Curve with tangent and normal lines at a point", "labels": "Point (x\u2081,y\u2081), tangent gradient f\u2032(x\u2081), normal gradient \u22121/f\u2032(x\u2081)", "shows": "Geometric meaning of derivative and perpendicular relationship"}, {"title": "Function and Derivative Graphs", "draw": "f(x) above f\u2032(x) on aligned axes", "labels": "Where f increasing \u2192 f\u2032 > 0; f decreasing \u2192 f\u2032 < 0; stationary \u2192 f\u2032 = 0", "shows": "Relationship between function behaviour and derivative sign"}, {"title": "Displacement-Time and Velocity-Time", "draw": "s-t graph above v-t graph (v = gradient of s)", "labels": "s(t), v(t) = ds/dt, gradient at each point", "shows": "Physical meaning of derivative in motion"}, {"title": "Increasing/Decreasing/Stationary", "draw": "Three curve segments showing each case", "labels": "f\u2032(x) > 0 (increasing), f\u2032(x) < 0 (decreasing), f\u2032(x) = 0 (stationary)", "shows": "Sign of derivative and function behaviour"}, {"title": "Angle of Inclination", "draw": "Line with angle \u03b8 to positive x-axis", "labels": "\u03b8, gradient m = rise/run, tan \u03b8 = m", "shows": "Relationship between gradient and angle"}], "practicals": [{"aim": "Investigate gradient of tangent using difference quotients", "iv": "Value of h (decreasing)", "dv": "Calculated difference quotient", "controls": "Function (e.g., x\u00b2, x\u00b3), point x", "graph": "Plot difference quotient vs h; observe limit as h\u21920", "limitations": "Numerical approximation error for very small h; calculator precision", "improvement": "Compare with exact derivative from first principles"}, {"aim": "Analyse motion from displacement-time data", "iv": "Time t", "dv": "Displacement s, velocity v, acceleration a", "controls": "Motion type (constant velocity, acceleration)", "graph": "s-t, v-t, a-t graphs; v = gradient of s; a = gradient of v", "limitations": "Measurement error in position; discrete data points", "improvement": "Use motion sensor for continuous data"}, {"aim": "Sketch derivative functions from given graphs", "iv": "Original function f(x) (various types)", "dv": "Estimated derivative f\u2032(x) at points", "controls": "Method (visual gradient estimation)", "graph": "Plot f\u2032(x) values; connect to form derivative graph", "limitations": "Subjective gradient estimation; difficulty at non-smooth points", "improvement": "Use technology to plot actual derivative for comparison"}], "traps": ["Confusing average rate (secant) with instantaneous rate (tangent)", "Forgetting limit notation when writing first principles definition", "Power rule error \u2014 d/dx(x\u207f) = nx\u207f\u207b\u00b9, not nx\u207f or x\u207f\u207b\u00b9 alone", "Product rule error \u2014 it's u\u00b7v\u2032 + v\u00b7u\u2032, NOT u\u2032\u00b7v\u2032 (common mistake!)", "Quotient rule order \u2014 LOW d-HIGH minus HIGH d-LOW over LOW\u00b2", "Chain rule \u2014 don't forget to multiply by derivative of inner function", "Sign errors in quotient rule \u2014 numerator is v\u00b7u\u2032 \u2212 u\u00b7v\u2032 (order matters!)", "Forgetting derivative is a function \u2014 f\u2032(x) gives gradient at any x", "Stationary point \u2260 turning point \u2014 could be horizontal inflection", "Normal gradient \u2014 it's NEGATIVE RECIPROCAL: \u22121/f\u2032(x\u2081), not 1/f\u2032(x\u2081)", "Motion confusion \u2014 v = ds/dt (first derivative), a = dv/dt (second derivative)", "Discontinuous functions \u2014 derivative doesn't exist at breaks or sharp corners", "Forgetting to evaluate derivative at the specific point for tangent/normal equations"], "knowButDontWrite": ["Rigorous epsilon-delta definition of limit", "Proof that differentiable \u2192 continuous (converse false)", "Derivatives of trig functions (Year 12)", "Derivatives of exponential and log functions (Year 12)", "Implicit differentiation (Extension 1)", "Parametric differentiation (Extension 1)", "Higher-order derivatives beyond acceleration (jerk, etc.)", "Mean Value Theorem and Rolle's Theorem"], "syllabusPoints": [{"text": "Distinguish continuous and discontinuous functions; identify key elements", "status": "covered", "section": "Core Ideas + Exam Traps"}, {"text": "Sketch graphs of continuous vs discontinuous functions", "status": "covered", "section": "Draw These"}, {"text": "Describe continuity informally; identify from graphs", "status": "covered", "section": "Core Ideas"}, {"text": "Describe gradient of secant as approximation of tangent gradient", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Examine relationship between angle of inclination \u03b8 and gradient m; tan \u03b8 = m", "status": "covered", "section": "Core Ideas + Formula Box + Draw These"}, {"text": "Describe behaviour using: increasing, decreasing, constant, stationary, etc.", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Interpret and use difference quotient [f(x+h)\u2212f(x)]/h", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Interpret gradient in contexts (distance-time, velocity-time)", "status": "covered", "section": "Core Ideas + Practicals + Draw These"}, {"text": "Examine difference quotient as h\u21920 as informal limit introduction", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Interpret derivative as gradient of tangent at point x", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Estimate derivative numerically for simple power functions", "status": "covered", "section": "Practicals"}, {"text": "Define derivative from first principles: f\u2032(x) = lim(h\u21920) [f(x+h)\u2212f(x)]/h", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Use notation: dy/dx = f\u2032(x) = y\u2032", "status": "covered", "section": "Core Ideas"}, {"text": "Use first principles to find derivative of polynomials up to degree 3", "status": "covered", "section": "Formula Box + Practicals"}, {"text": "Understand derivative as a function", "status": "covered", "section": "Core Ideas"}, {"text": "Sketch derivative function for given graph (without algebra)", "status": "covered", "section": "Core Ideas + Draw These + Practicals"}, {"text": "Establish f\u2032(x) = 0 at stationary, f\u2032 > 0 increasing, f\u2032 < 0 decreasing", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Identify families of curves with same derivative function", "status": "covered", "section": "Core Ideas (constant of integration concept)"}, {"text": "Use technology to plot functions and gradient functions", "status": "covered", "section": "Practicals"}, {"text": "Interpret derivative as instantaneous rate of change", "status": "covered", "section": "Core Ideas \u2605 + Exam Traps"}, {"text": "Examine variable rates of change of non-linear functions", "status": "covered", "section": "Core Ideas + Practicals"}, {"text": "Use d/dx(x\u207f) = nx\u207f\u207b\u00b9 for all real n", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Differentiate constant multiple and sum/difference", "status": "covered", "section": "Core Ideas + Formula Box"}, {"text": "Understand and use product, quotient, chain rules", "status": "covered", "section": "Core Ideas \u2605 + Formula Box + Exam Traps"}, {"text": "Apply product rule: d/dx(uv) = u(dv/dx) + v(du/dx)", "status": "covered", "section": "Formula Box + Exam Traps"}, {"text": "Apply quotient rule: d/dx(u/v) = [v(du/dx) \u2212 u(dv/dx)]/v\u00b2", "status": "covered", "section": "Formula Box + Exam Traps"}, {"text": "Apply chain rule: dy/dx = (dy/du) \u00d7 (du/dx)", "status": "covered", "section": "Formula Box + Exam Traps"}, {"text": "Calculate derivatives to solve problems including instantaneous rate", "status": "covered", "section": "Practicals + Exam Traps"}, {"text": "Use derivative to find tangent/normal equations", "status": "covered", "section": "Formula Box + Draw These"}, {"text": "Determine velocity from displacement: v = ds/dt", "status": "covered", "section": "Core Ideas + Formula Box + Practicals"}, {"text": "Determine acceleration from velocity: a = dv/dt", "status": "covered", "section": "Core Ideas + Formula Box"}]}, {"id": 4, "subject": "Mathematics Advanced", "number": "E1", "title": "Logarithms and Exponentials", "year": "Year 11", "dotPoints": 20, "status": "not-started", "coreIdeas": [{"text": "Logarithm definition: y = a\u02e3 \u27fa x = log\u2090y (a > 0, a \u2260 1, y > 0)", "star": true}, {"text": "Log laws: log\u2090(mn) = log\u2090m + log\u2090n; log\u2090(m/n) = log\u2090m \u2212 log\u2090n; log\u2090(m\u207f) = n\u00b7log\u2090m", "star": true}, {"text": "Special values: log\u2090a = 1; log\u20901 = 0; log\u2090(1/x) = \u2212log\u2090x", "star": true}, {"text": "Inverse relationship: a^(log\u2090x) = x (x > 0); log\u2090(a\u02e3) = x (all real x)", "star": true}, {"text": "Change of base: log\u2090x = log\u1d66x / log\u1d66a \u2014 use to evaluate with calculator", "star": true}, {"text": "Natural logarithm: ln x = log\u2091x where e \u2248 2.71828 (Euler's number)", "star": true}, {"text": "Exponential function: f(x) = e\u02e3 has derivative d/dx(e\u02e3) = e\u02e3 (unique property)", "star": true}, {"text": "General exponential: f(x) = ka\u02e3 or f(x) = ke\u1d43\u02e3 \u2014 k = initial value, a = growth/decay rate", "star": true}, {"text": "Graph y = a\u02e3: always through (0,1); asymptote y = 0; increasing if a > 1, decreasing if 0 < a < 1", "star": true}, {"text": "Graph y = log\u2090x: always through (1,0); asymptote x = 0; inverse of y = a\u02e3", "star": true}, {"text": "Reflection: y = a\u02e3 and y = log\u2090x are reflections in line y = x", "star": true}, {"text": "Transformations: y = ka\u02e3\u207a\u1d47 + c \u2014 horizontal shift \u2212b, vertical stretch k, vertical shift c", "star": true}, {"text": "Solving exponential equations: take logs of both sides; use log laws to isolate x", "star": true}, {"text": "Applications: population growth, radioactive decay, compound interest, pH, decibels, Richter scale", "star": true}, {"text": "e\u02e3 and ln x are inverses: e^(ln x) = x (x > 0); ln(e\u02e3) = x (all real x)", "star": true}, {"text": "Differentiation: d/dx(e\u02e3) = e\u02e3; d/dx(ke\u1d43\u02e3) = ka\u00b7e\u1d43\u02e3 (chain rule)", "star": true}, {"text": "Logarithmic scales: compress large ranges (earthquake magnitude, sound intensity, acidity)", "star": false}], "formulas": [{"equation": "y = a\u02e3 \u27fa x = log\u2090y", "definition": "Logarithm definition", "condition": "a > 0, a \u2260 1, y > 0"}, {"equation": "log\u2090(mn) = log\u2090m + log\u2090n", "definition": "Product law", "condition": "m, n > 0"}, {"equation": "log\u2090(m/n) = log\u2090m \u2212 log\u2090n", "definition": "Quotient law", "condition": "m, n > 0"}, {"equation": "log\u2090(m\u207f) = n\u00b7log\u2090m", "definition": "Power law", "condition": "m > 0"}, {"equation": "log\u2090a = 1, log\u20901 = 0", "definition": "Special values", "condition": ""}, {"equation": "a^(log\u2090x) = x, log\u2090(a\u02e3) = x", "definition": "Inverse relationships", "condition": "x > 0 (first); all x (second)"}, {"equation": "log\u2090x = log\u1d66x / log\u1d66a", "definition": "Change of base formula", "condition": "a, b > 0, a,b \u2260 1"}, {"equation": "ln x = log\u2091x", "definition": "Natural logarithm", "condition": "x > 0"}, {"equation": "d/dx(e\u02e3) = e\u02e3", "definition": "Derivative of exponential", "condition": ""}, {"equation": "d/dx(ke\u1d43\u02e3) = ka\u00b7e\u1d43\u02e3", "definition": "Derivative with chain rule", "condition": "k, a constants"}, {"equation": "y = ka\u02e3\u207a\u1d47 + c", "definition": "Transformed exponential", "condition": "k, b, c constants"}, {"equation": "y = k\u00b7log\u2090x + c", "definition": "Transformed logarithm", "condition": "k, c constants"}], "diagrams": [{"title": "Exponential Graphs y = a\u02e3", "draw": "Two curves: a > 1 (growth) and 0 < a < 1 (decay)", "labels": "Both through (0,1); asymptote y = 0; y-axis intercept", "shows": "Effect of base a on growth/decay"}, {"title": "Logarithmic Graphs y = log\u2090x", "draw": "Two curves: a > 1 and 0 < a < 1", "labels": "Both through (1,0); asymptote x = 0; x-axis intercept", "shows": "Effect of base a; domain x > 0"}, {"title": "Inverse Reflection", "draw": "y = a\u02e3 and y = log\u2090x on same axes with line y = x", "labels": "Line y = x as mirror; corresponding points reflected", "shows": "Why they are inverse functions"}, {"title": "Transformed Exponential", "draw": "y = e\u02e3 and y = 2e\u02e3\u207a\u00b9 \u2212 3 on same axes", "labels": "Asymptote y = \u22123, y-intercept, horizontal shift \u22121, vertical stretch 2", "shows": "Effect of k, b, c parameters"}, {"title": "Logarithmic Scale Example", "draw": "Number line showing powers of 10: 1, 10, 100, 1000 equally spaced", "labels": "Log scale: equal distances = equal ratios", "shows": "How log scales compress large ranges"}], "practicals": [{"aim": "Model exponential growth/decay from real data", "iv": "Time t", "dv": "Quantity N (population, mass, etc.)", "controls": "Initial value N\u2080, growth/decay constant", "graph": "Plot N vs t; fit curve N = N\u2080e^(kt) or N = N\u2080a\u1d57", "limitations": "Real data has noise; model assumes constant rate; external factors ignored", "improvement": "Use regression to find best-fit k value"}, {"aim": "Investigate derivative of exponential functions", "iv": "Function type (e\u02e3, 2\u02e3, e\u00b2\u02e3, etc.)", "dv": "Gradient function values", "controls": "Point of evaluation", "graph": "Plot f(x) and f\u2032(x); observe f\u2032(x) = f(x) only for e\u02e3", "limitations": "Numerical gradient approximation error", "improvement": "Prove algebraically using first principles"}, {"aim": "Solve exponential equations graphically and algebraically", "iv": "Equation type (same base, different base, with logs)", "dv": "Solution method and answer", "controls": "Domain restrictions", "graph": "Graph both sides; intersection = solution", "limitations": "Graphical method limited by resolution; may miss exact form", "improvement": "Verify algebraic solution by substitution"}], "traps": ["Log of negative number or zero \u2014 undefined! Domain is x > 0 only", "Confusing log\u2090(mn) with (log\u2090m)(log\u2090n) \u2014 it's log\u2090m + log\u2090n (addition, not multiplication)", "Forgetting log\u2090(m/n) = log\u2090m \u2212 log\u2090n (subtraction for division)", "Power law error \u2014 log\u2090(m\u207f) = n\u00b7log\u2090m (bring power down as multiplier)", "Change of base \u2014 denominator is log\u1d66a, not log\u2090b", "Inverse confusion \u2014 a^(log\u2090x) = x, NOT log\u2090(a\u02e3) = a (that's x!)", "Natural log notation \u2014 ln x means log\u2091x, NOT log x (base 10) or log\u2081\u2080x", "Derivative of e\u02e3 \u2014 it's e\u02e3 (unchanged), NOT xe\u02e3\u207b\u00b9 (power rule doesn't apply!)", "Chain rule with e\u1d43\u02e3 \u2014 derivative is a\u00b7e\u1d43\u02e3, don't forget the 'a' factor", "Solving equations \u2014 must isolate the exponential/log term FIRST before applying inverse", "Extraneous solutions \u2014 always check x > 0 for log equations", "Graph asymptotes \u2014 exponential: y = 0; logarithm: x = 0 (don't swap!)", "Transformation direction \u2014 y = a\u02e3\u207a\u1d47 shifts LEFT by b (opposite sign)", "Forgetting e \u2248 2.718 is a number, not a variable"], "knowButDontWrite": ["Proof that lim(h\u21920)(e\u02b0\u22121)/h = 1", "Derivation of e as limit: e = lim(n\u2192\u221e)(1+1/n)\u207f", "Taylor series for e\u02e3 and ln x", "Integration of exponential and log functions (Year 12)", "Logistic growth models (carrying capacity)", "Complex logarithms and multi-valued functions", "Historical development of Napier's logarithms", "Applications in finance: continuous compounding A = Pe^(rt)"], "syllabusPoints": [{"text": "Define logarithms as indices: y = a\u02e3 \u27fa x = log\u2090y", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Explain why definition requires a > 0, a \u2260 1", "status": "covered", "section": "Core Ideas + Exam Traps"}, {"text": "Recognise and sketch y = ka\u02e3, y = ka\u207b\u02e3, y = log\u2090x", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Recognise inverse relationship between logs and exponentials", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Understand and use log\u2090a\u02e3 = x and a^(log\u2090x) = x", "status": "covered", "section": "Core Ideas \u2605 + Formula Box + Exam Traps"}, {"text": "Derive log laws from index laws", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Use log laws to simplify and evaluate expressions", "status": "covered", "section": "Core Ideas + Practicals + Exam Traps"}, {"text": "Consider different number bases; prove and use change of base law", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Interpret and use logarithmic scales (decibels, earthquake, pH, etc.)", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Solve problems involving logarithms in practical contexts", "status": "covered", "section": "Practicals + Exam Traps"}, {"text": "Establish and use d(e\u02e3)/dx = e\u02e3", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Sketch and explore gradient function of exponentials; determine e \u2248 2.718...", "status": "covered", "section": "Core Ideas + Practicals"}, {"text": "Apply differentiation rules to f(x) = ke\u1d43\u02e3", "status": "covered", "section": "Core Ideas + Formula Box + Exam Traps"}, {"text": "Work with natural logarithms in practical and abstract contexts", "status": "covered", "section": "Core Ideas + Practicals"}, {"text": "Define ln x = log\u2091x from f(x) = e\u02e3", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Recognise and use inverse relationship of y = e\u02e3 and y = ln x", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Use e^(ln x) = x and ln(e\u02e3) = x", "status": "covered", "section": "Core Ideas + Formula Box + Exam Traps"}, {"text": "Use log laws to simplify and evaluate natural log expressions", "status": "covered", "section": "Core Ideas + Practicals"}, {"text": "Solve equations involving indices using logarithms", "status": "covered", "section": "Core Ideas \u2605 + Practicals + Exam Traps"}, {"text": "Graph y = a\u02e3 and transformations y = ka\u02e3\u207a\u1d47 + c", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Interpret intercepts of exponential graph; explain when they don't exist", "status": "covered", "section": "Core Ideas + Draw These + Exam Traps"}, {"text": "Use algebraic properties of exponential functions to simplify and solve", "status": "covered", "section": "Core Ideas + Practicals"}, {"text": "Solve problems involving exponential functions (technology and algebraically)", "status": "covered", "section": "Practicals + Exam Traps"}, {"text": "Graph y = log\u2090x and transformations y = k\u00b7log\u2090x + c", "status": "covered", "section": "Core Ideas + Draw These"}, {"text": "Recognise y = a\u02e3 and y = log\u2090x are reflections in y = x", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Model situations and solve equations involving log or exponential functions", "status": "covered", "section": "Practicals + Exam Traps"}, {"text": "Identify contexts suitable for exponential/log modelling; solve practical problems", "status": "covered", "section": "Core Ideas + Practicals"}]}, {"id": 5, "subject": "Mathematics Advanced", "number": "S1", "title": "Probability and Discrete Probability Distributions", "year": "Year 11", "dotPoints": 18, "status": "not-started", "coreIdeas": [{"text": "Probability scale: 0 \u2264 P(A) \u2264 1; P(impossible) = 0; P(certain) = 1", "star": true}, {"text": "Complement: P(A') = 1 \u2212 P(A) \u2014 probability A does NOT occur", "star": true}, {"text": "Addition rule: P(A \u222a B) = P(A) + P(B) \u2212 P(A \u2229 B)", "star": true}, {"text": "Mutually exclusive: A \u2229 B = \u2205; P(A \u2229 B) = 0; P(A \u222a B) = P(A) + P(B)", "star": true}, {"text": "Conditional probability: P(A|B) = P(A \u2229 B) / P(B), where P(B) \u2260 0", "star": true}, {"text": "Independence: P(A|B) = P(A) \u2014 occurrence of B doesn't affect A", "star": true}, {"text": "Multiplication law (independent): P(A \u2229 B) = P(A) \u00d7 P(B)", "star": true}, {"text": "Tree diagrams: multiply along branches for P(outcome); add down columns for P(event)", "star": true}, {"text": "Venn diagrams: circle = event; overlap = intersection; outside = complement", "star": true}, {"text": "Random variable X: numerical outcome of random process; discrete = countable values", "star": true}, {"text": "Probability distribution: table/list of all x values with P(X = x); \u03a3P = 1", "star": true}, {"text": "Expected value: E(X) = \u03bc = \u03a3[x\u00b7P(X=x)] \u2014 long-run average", "star": true}, {"text": "Variance: Var(X) = E[(X\u2212\u03bc)\u00b2] = E(X\u00b2) \u2212 \u03bc\u00b2 \u2014 measure of spread", "star": true}, {"text": "Standard deviation: \u03c3 = \u221aVar(X) \u2014 same units as X", "star": true}, {"text": "Uniform discrete: all outcomes equally likely; P(X=x) = 1/n for n outcomes", "star": true}, {"text": "Sample mean x\u0304 estimates population mean \u03bc; sample std dev s estimates \u03c3", "star": true}, {"text": "Relative frequency from data = point estimate of probability", "star": true}, {"text": "Larger sample size \u2192 better estimates of \u03bc and \u03c3 (Law of Large Numbers)", "star": false}], "formulas": [{"equation": "P(A') = 1 \u2212 P(A)", "definition": "Complement rule", "condition": ""}, {"equation": "P(A \u222a B) = P(A) + P(B) \u2212 P(A \u2229 B)", "definition": "Addition rule", "condition": ""}, {"equation": "P(A \u2229 B) = 0", "definition": "Mutually exclusive", "condition": "A and B cannot occur together"}, {"equation": "P(A|B) = P(A \u2229 B) / P(B)", "definition": "Conditional probability", "condition": "P(B) \u2260 0"}, {"equation": "P(A \u2229 B) = P(A) \u00d7 P(B)", "definition": "Multiplication law (independent)", "condition": "A and B independent"}, {"equation": "P(A|B) = P(A)", "definition": "Independence condition", "condition": ""}, {"equation": "E(X) = \u03bc = \u03a3[x\u00b7P(X=x)]", "definition": "Expected value", "condition": "discrete random variable"}, {"equation": "Var(X) = E[(X\u2212\u03bc)\u00b2] = E(X\u00b2) \u2212 \u03bc\u00b2", "definition": "Variance", "condition": ""}, {"equation": "\u03c3 = \u221aVar(X)", "definition": "Standard deviation", "condition": ""}, {"equation": "P(X=x) = 1/n", "definition": "Uniform discrete distribution", "condition": "n equally likely outcomes"}, {"equation": "\u03a3P(X=x) = 1", "definition": "Sum of probabilities", "condition": "all possible x values"}], "diagrams": [{"title": "Venn Diagram for Two Events", "draw": "Two overlapping circles in rectangle (sample space)", "labels": "A, B, A\u2229B (overlap), A\u222aB (both circles), A', B', sample space S", "shows": "Visual representation of set operations and probabilities"}, {"title": "Tree Diagram for Multi-stage Experiment", "draw": "Branching tree with probabilities on branches", "labels": "First stage branches, second stage branches, outcomes at ends, P(outcome) = product along path", "shows": "How to calculate probabilities for sequential events"}, {"title": "Probability Distribution Table/Graph", "draw": "Table with x and P(X=x) columns; bar graph below", "labels": "x values, probabilities (sum = 1), bars with height = P(X=x)", "shows": "Visual representation of discrete distribution"}, {"title": "Expected Value Illustration", "draw": "Weighted balance or centre of mass diagram", "labels": "x values as positions, P(X=x) as weights, \u03bc as balance point", "shows": "Why E(X) is the 'centre' of distribution"}, {"title": "Conditional Probability Venn", "draw": "Venn diagram with B shaded as new sample space", "labels": "Original S, given B (restricted space), A\u2229B within B", "shows": "Why P(A|B) = P(A\u2229B)/P(B) \u2014 B becomes new whole"}], "practicals": [{"aim": "Estimate probabilities using relative frequencies from experiments", "iv": "Number of trials n", "dv": "Relative frequency of event A", "controls": "Event definition, experimental conditions", "graph": "Plot relative frequency vs n; observe convergence to theoretical P(A)", "limitations": "Small n gives poor estimates; experimental bias; non-independent trials", "improvement": "Increase sample size; ensure truly random sampling"}, {"aim": "Simulate multi-stage probability experiments", "iv": "Simulation method (dice, coins, random numbers)", "dv": "Estimated P(outcome)", "controls": "Number of simulations", "graph": "Compare simulated probabilities with theoretical from tree diagram", "limitations": "Simulation error; limited trials; may not capture rare events", "improvement": "Use technology for large number of trials (1000+)"}, {"aim": "Analyse discrete probability distributions from real data", "iv": "Dataset (e.g., number of siblings, test scores)", "dv": "Calculated E(X), Var(X), \u03c3", "controls": "Sample size, data collection method", "graph": "Histogram of data with mean and std dev marked", "limitations": "Sample may not represent population; discrete approximation of continuous", "improvement": "Collect larger, more representative sample"}], "traps": ["P(A \u222a B) = P(A) + P(B) only if mutually exclusive \u2014 otherwise subtract intersection!", "Confusing P(A|B) with P(B|A) \u2014 order matters in conditional probability", "Forgetting P(B) \u2260 0 requirement in conditional probability formula", "Independence vs mutually exclusive \u2014 independent can both occur; mutually exclusive cannot", "Multiplication law P(A\u2229B) = P(A)P(B) only for independent events", "Tree diagram error \u2014 probabilities on branches from same point must sum to 1", "Expected value not necessarily a possible outcome \u2014 E(X) can be non-integer", "Variance formula \u2014 E(X\u00b2) \u2212 \u03bc\u00b2, NOT (E(X))\u00b2 \u2212 \u03bc (that's zero!)", "Standard deviation units \u2014 same as X, not squared like variance", "Sum of probabilities must equal 1 \u2014 check this for any distribution", "Confusing sample statistics (x\u0304, s) with population parameters (\u03bc, \u03c3)", "Relative frequency is an estimate \u2014 gets better with larger sample size", "Complement P(A') = 1 \u2212 P(A) \u2014 only works if A and A' cover all outcomes", "Forgetting to check independence \u2014 don't assume; verify P(A|B) = P(A)"], "knowButDontWrite": ["Formal axiomatic definition of probability (Kolmogorov)", "Bayes' Theorem derivation and applications", "Binomial distribution formula P(X=k) = C(n,k)p\u1d4f(1\u2212p)\u207f\u207b\u1d4f (Year 12)", "Continuous random variables and probability density functions", "Central Limit Theorem", "Confidence intervals and hypothesis testing", "Covariance and correlation for two random variables", "Moment-generating functions"], "syllabusPoints": [{"text": "Understand and use concepts/language of theoretical probability, relative frequency, probability scale", "status": "covered", "section": "Core Ideas \u2605"}, {"text": "Solve problems involving simulations or trials of experiments", "status": "covered", "section": "Practicals"}, {"text": "Identify factors complicating simulation of real-world events", "status": "covered", "section": "Practicals (limitations)"}, {"text": "Use relative frequencies from data as point estimates of probabilities", "status": "covered", "section": "Core Ideas + Practicals"}, {"text": "Use arrays and tree diagrams for multi-stage experiments", "status": "covered", "section": "Core Ideas \u2605 + Draw These + Practicals"}, {"text": "Use Venn diagrams, set language: A', A\u2229B, A\u222aB; recognise mutually exclusive", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Use everyday occurrences to illustrate set descriptions and operations", "status": "covered", "section": "Core Ideas (examples)"}, {"text": "Establish and use P(A') = 1 \u2212 P(A) and P(A \u222a B) = P(A) + P(B) \u2212 P(A \u2229 B)", "status": "covered", "section": "Core Ideas \u2605 + Formula Box + Exam Traps"}, {"text": "Understand conditional probability; recognise language indicating conditionality", "status": "covered", "section": "Core Ideas \u2605 + Draw These"}, {"text": "Use notation P(A|B) and formula P(A|B) = P(A\u2229B)/P(B)", "status": "covered", "section": "Core Ideas \u2605 + Formula Box + Exam Traps"}, {"text": "Understand independence: P(A|B) = P(A)", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Use multiplication law P(A\u2229B) = P(A)P(B) for independent events", "status": "covered", "section": "Core Ideas \u2605 + Formula Box + Exam Traps"}, {"text": "Define and categorise random variables (discrete vs continuous)", "status": "covered", "section": "Core Ideas \u2605"}, {"text": "Random variable describes aspect of population from which samples drawn", "status": "covered", "section": "Core Ideas"}, {"text": "Use discrete random variables and probabilities to solve practical problems", "status": "covered", "section": "Core Ideas + Practicals"}, {"text": "Use relative frequencies to obtain point estimates for discrete random variable", "status": "covered", "section": "Practicals"}, {"text": "Recognise uniform discrete random variables; model equally likely outcomes", "status": "covered", "section": "Core Ideas + Formula Box"}, {"text": "Examine non-uniform discrete; recognise \u03a3P = 1 for any random variable", "status": "covered", "section": "Core Ideas \u2605 + Exam Traps"}, {"text": "Recognise mean/expected value E(X) = \u03bc as measure of centre; evaluate", "status": "covered", "section": "Core Ideas \u2605 + Formula Box + Draw These"}, {"text": "Recognise variance Var(X) and standard deviation \u03c3 as measures of spread; evaluate", "status": "covered", "section": "Core Ideas \u2605 + Formula Box"}, {"text": "Use Var(X) = E[(X\u2212\u03bc)\u00b2] = E(X\u00b2) \u2212 \u03bc\u00b2 and Var(x) = \u03c3\u00b2 for dataset", "status": "covered", "section": "Core Ideas + Formula Box + Exam Traps"}, {"text": "Understand sample mean x\u0304 estimates \u03bc; sample std dev s estimates \u03c3", "status": "covered", "section": "Core Ideas + Exam Traps"}, {"text": "Estimates improve with larger sample size and independent observations", "status": "covered", "section": "Core Ideas + Practicals"}]}];
+
+        let modules = [];
+        let currentModule = null;
+
+        function loadSavedData() {
+            const saved = localStorage.getItem('hsc-modules');
+            if (saved) {
+                const savedModules = JSON.parse(saved);
+                modules = modulesData.map((m, i) => {
+                    const saved = savedModules.find(s => s.number === m.number);
+                    return saved ? {...m, status: saved.status} : m;
+                });
+            } else {
+                modules = modulesData;
+            }
+
+            const savedPrefs = localStorage.getItem('hsc-preferences');
+            if (savedPrefs) {
+                const prefs = JSON.parse(savedPrefs);
+                document.getElementById('page-format').value = prefs.pageFormat || 'a4-single';
+                document.getElementById('detail-level').value = prefs.detailLevel || 'standard';
+                document.getElementById('high-priority-only').checked = prefs.highPriorityOnly || false;
+                document.getElementById('hide-explanations').checked = prefs.hideExplanations || false;
+                document.getElementById('show-checkboxes').checked = prefs.showCheckboxes || false;
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('hsc-modules', JSON.stringify(modules));
+        }
+
+        function savePreferences() {
+            const prefs = {
+                pageFormat: document.getElementById('page-format').value,
+                detailLevel: document.getElementById('detail-level').value,
+                highPriorityOnly: document.getElementById('high-priority-only').checked,
+                hideExplanations: document.getElementById('hide-explanations').checked,
+                showCheckboxes: document.getElementById('show-checkboxes').checked
+            };
+            localStorage.setItem('hsc-preferences', JSON.stringify(prefs));
+        }
+
+        function renderModules() {
+            const grid = document.getElementById('modules-grid');
+            const searchTerm = document.getElementById('search-modules').value.toLowerCase();
+            const subjectFilter = document.getElementById('filter-subject').value;
+            const statusFilter = document.getElementById('filter-status').value;
+
+            grid.innerHTML = '';
+
+            const filtered = modules.filter(m => {
+                const matchesSearch = m.title.toLowerCase().includes(searchTerm) || 
+                                     m.subject.toLowerCase().includes(searchTerm);
+                const matchesSubject = !subjectFilter || m.subject === subjectFilter;
+                const matchesStatus = !statusFilter || m.status === statusFilter;
+                return matchesSearch && matchesSubject && matchesStatus;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<p style="color: var(--gray); grid-column: 1/-1;">No modules found.</p>';
+                return;
+            }
+
+            filtered.forEach((module, index) => {
+                const realIndex = modules.findIndex(m => m.number === module.number);
+                const card = document.createElement('div');
+                card.className = 'module-card';
+                card.innerHTML = `
+                    <div class="subject">${module.subject}</div>
+                    <h3>Module ${module.number}: ${module.title}</h3>
+                    <div class="meta">
+                        <span>${module.dotPoints} dot points</span>
+                        <span>${module.year}</span>
+                    </div>
+                    <span class="status ${module.status}">${module.status.replace('-', ' ').toUpperCase()}</span>
+                    <button class="btn btn-primary" onclick="openModule(${realIndex})">Study Sheet</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function openModule(index) {
+            currentModule = modules[index];
+
+            document.getElementById('dashboard-tab').classList.add('hidden');
+            document.getElementById('syllabus-tab').classList.add('hidden');
+            document.getElementById('study-sheet-view').classList.remove('hidden');
+
+            renderStudySheet(currentModule);
+            renderSyllabusCoverage(currentModule);
+
+            if (currentModule.status === 'not-started') {
+                currentModule.status = 'in-progress';
+                saveData();
+                renderModules();
+            }
+        }
+
+        function backToDashboard() {
+            document.getElementById('study-sheet-view').classList.add('hidden');
+            document.getElementById('dashboard-tab').classList.remove('hidden');
+            currentModule = null;
+        }
+
+        function renderStudySheet(module) {
+            const content = document.getElementById('study-sheet-content');
+            const showCheckboxes = document.getElementById('show-checkboxes').checked;
+            const hideExplanations = document.getElementById('hide-explanations').checked;
+            const highPriorityOnly = document.getElementById('high-priority-only').checked;
+
+            const checkboxHtml = showCheckboxes ? '<input type="checkbox" style="margin-right: 8px;"> ' : '';
+
+            content.innerHTML = `
+                <h2>${module.subject} — Module ${module.number}: ${module.title}</h2>
+
+                <div class="sheet-section section-core">
+                    <div class="sheet-section-header" onclick="toggleSection(this)">
+                        <span>★ Core Ideas</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="sheet-section-content">
+                        <ul class="content-list">
+                            ${module.coreIdeas.filter(idea => !highPriorityOnly || idea.star).map(idea => `
+                                <li>${checkboxHtml}${idea.star ? '<span class="star">★</span> ' : ''}${idea.text}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="sheet-section section-formula">
+                    <div class="sheet-section-header" onclick="toggleSection(this)">
+                        <span>📐 Formula Box</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="sheet-section-content">
+                        ${module.formulas.map(formula => `
+                            <div class="formula-box">
+                                <div class="formula">${checkboxHtml}${formula.equation}</div>
+                                ${formula.definition ? `<div class="formula-def">${formula.definition}</div>` : ''}
+                                ${formula.condition ? `<div class="formula-def" style="color: var(--red);">Condition: ${formula.condition}</div>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="sheet-section section-draw">
+                    <div class="sheet-section-header" onclick="toggleSection(this)">
+                        <span>✏️ Draw These</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="sheet-section-content">
+                        ${module.diagrams.map((diagram, i) => `
+                            <div class="diagram-card">
+                                <h4>${checkboxHtml}${i + 1}. ${diagram.title}</h4>
+                                <ul>
+                                    <li><strong>Draw:</strong> ${diagram.draw}</li>
+                                    <li><strong>Labels:</strong> ${diagram.labels}</li>
+                                    <li><strong>Shows:</strong> ${diagram.shows}</li>
+                                </ul>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="sheet-section section-practical">
+                    <div class="sheet-section-header" onclick="toggleSection(this)">
+                        <span>🔬 Practicals</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="sheet-section-content">
+                        ${module.practicals.map(practical => `
+                            <div class="diagram-card">
+                                <h4>${checkboxHtml}${practical.aim}</h4>
+                                <ul>
+                                    <li><strong>IV:</strong> ${practical.iv} | <strong>DV:</strong> ${practical.dv}</li>
+                                    <li><strong>Controls:</strong> ${practical.controls}</li>
+                                    <li><strong>Graph:</strong> ${practical.graph}</li>
+                                    <li><strong>Limitations:</strong> ${practical.limitations}</li>
+                                    ${practical.improvement ? `<li><strong>Improvement:</strong> ${practical.improvement}</li>` : ''}
+                                </ul>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                <div class="sheet-section section-traps">
+                    <div class="sheet-section-header" onclick="toggleSection(this)">
+                        <span>⚠️ Exam Traps</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="sheet-section-content">
+                        ${module.traps.map(trap => `
+                            <div class="trap-item">${checkboxHtml}${trap}</div>
+                        `).join('')}
+                    </div>
+                </div>
+
+                ${module.knowButDontWrite.length > 0 ? `
+                <div class="sheet-section section-know">
+                    <div class="sheet-section-header" onclick="toggleSection(this)">
+                        <span>📝 Know but Don't Write</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="sheet-section-content">
+                        <ul class="content-list">
+                            ${module.knowButDontWrite.map(item => `
+                                <li>${checkboxHtml}${item}</li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                </div>
+                ` : ''}
+            `;
+
+            if (hideExplanations) {
+                document.querySelectorAll('.formula-def').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('.diagram-card ul').forEach(el => el.classList.add('hidden'));
+                document.querySelectorAll('.trap-item').forEach(el => {
+                    el.innerHTML = el.innerHTML.replace(/<input.*?>/g, '<input type="checkbox" style="margin-right: 8px;"> ');
+                });
+            }
+        }
+
+        function renderSyllabusCoverage(module) {
+            const content = document.getElementById('syllabus-coverage-content');
+
+            content.innerHTML = `
+                <h3 style="color: var(--purple); margin-bottom: 10px;">${module.subject} — Module ${module.number}: ${module.title}</h3>
+                <table class="coverage-table">
+                    <thead>
+                        <tr>
+                            <th>Syllabus Dot Point</th>
+                            <th>Coverage Status</th>
+                            <th>Section</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${module.syllabusPoints.map(point => `
+                            <tr>
+                                <td>${point.text}</td>
+                                <td><span class="coverage-status ${point.status}">${point.status}</span></td>
+                                <td>${point.section}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+        }
+
+        function toggleSection(header) {
+            const content = header.nextElementSibling;
+            content.classList.toggle('hidden');
+            header.querySelector('span:last-child').textContent = content.classList.contains('hidden') ? '▶' : '▼';
+        }
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const tabName = tab.dataset.tab;
+                document.getElementById('dashboard-tab').classList.add('hidden');
+                document.getElementById('syllabus-tab').classList.add('hidden');
+
+                if (tabName === 'dashboard') {
+                    document.getElementById('dashboard-tab').classList.remove('hidden');
+                } else if (tabName === 'syllabus') {
+                    document.getElementById('syllabus-tab').classList.remove('hidden');
+                }
+            });
+        });
+
+        document.getElementById('search-modules').addEventListener('input', renderModules);
+        document.getElementById('filter-subject').addEventListener('change', renderModules);
+        document.getElementById('filter-status').addEventListener('change', renderModules);
+
+        document.getElementById('page-format').addEventListener('change', savePreferences);
+        document.getElementById('detail-level').addEventListener('change', () => {
+            savePreferences();
+            if (currentModule) renderStudySheet(currentModule);
+        });
+        document.getElementById('high-priority-only').addEventListener('change', () => {
+            savePreferences();
+            if (currentModule) renderStudySheet(currentModule);
+        });
+        document.getElementById('hide-explanations').addEventListener('change', () => {
+            savePreferences();
+            if (currentModule) renderStudySheet(currentModule);
+        });
+        document.getElementById('show-checkboxes').addEventListener('change', () => {
+            savePreferences();
+            if (currentModule) renderStudySheet(currentModule);
+        });
+
+        loadSavedData();
+        renderModules();
+    </script>
+</body>
+</html>
