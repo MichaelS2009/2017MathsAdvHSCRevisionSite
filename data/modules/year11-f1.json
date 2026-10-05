@@ -1,0 +1,21 @@
+{
+  "slug": "year11-f1",
+  "subject": "Mathematics Advanced",
+  "number": "F1",
+  "title": "Working with Functions",
+  "year": "Year 11",
+  "dotPoints": 28,
+  "status": "not-started",
+  "coreIdeas": [
+    {
+      "text": "Populate this module from the NSW syllabus before revision. Keep each point compact and exam-focused.",
+      "star": true
+    }
+  ],
+  "formulas": [],
+  "diagrams": [],
+  "practicals": [],
+  "traps": [],
+  "knowButDontWrite": [],
+  "syllabusPoints": []
+}

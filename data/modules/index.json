@@ -1,0 +1,128 @@
+[
+  {
+    "slug": "year11-f1",
+    "subject": "Mathematics Advanced",
+    "number": "F1",
+    "title": "Working with Functions",
+    "year": "Year 11",
+    "dotPoints": 28,
+    "status": "not-started"
+  },
+  {
+    "slug": "year11-t1",
+    "subject": "Mathematics Advanced",
+    "number": "T1",
+    "title": "Trigonometry and Measure of Angles",
+    "year": "Year 11",
+    "dotPoints": 18,
+    "status": "not-started"
+  },
+  {
+    "slug": "year11-t2",
+    "subject": "Mathematics Advanced",
+    "number": "T2",
+    "title": "Trigonometric Functions and Identities",
+    "year": "Year 11",
+    "dotPoints": 12,
+    "status": "not-started"
+  },
+  {
+    "slug": "year11-c1",
+    "subject": "Mathematics Advanced",
+    "number": "C1",
+    "title": "Introduction to Differentiation",
+    "year": "Year 11",
+    "dotPoints": 22,
+    "status": "not-started"
+  },
+  {
+    "slug": "year11-e1",
+    "subject": "Mathematics Advanced",
+    "number": "E1",
+    "title": "Logarithms and Exponentials",
+    "year": "Year 11",
+    "dotPoints": 20,
+    "status": "not-started"
+  },
+  {
+    "slug": "year11-s1",
+    "subject": "Mathematics Advanced",
+    "number": "S1",
+    "title": "Probability and Discrete Probability Distributions",
+    "year": "Year 11",
+    "dotPoints": 18,
+    "status": "not-started"
+  },
+  {
+    "slug": "year12-f2",
+    "subject": "Mathematics Advanced",
+    "number": "F2",
+    "title": "Graphing Techniques",
+    "year": "Year 12",
+    "dotPoints": 10,
+    "status": "not-started"
+  },
+  {
+    "slug": "year12-t3",
+    "subject": "Mathematics Advanced",
+    "number": "T3",
+    "title": "Trigonometric Functions and Graphs",
+    "year": "Year 12",
+    "dotPoints": 8,
+    "status": "not-started"
+  },
+  {
+    "slug": "year12-c2",
+    "subject": "Mathematics Advanced",
+    "number": "C2",
+    "title": "Differential Calculus",
+    "year": "Year 12",
+    "dotPoints": 15,
+    "status": "not-started"
+  },
+  {
+    "slug": "year12-c3",
+    "subject": "Mathematics Advanced",
+    "number": "C3",
+    "title": "Applications of Differentiation",
+    "year": "Year 12",
+    "dotPoints": 14,
+    "status": "not-started"
+  },
+  {
+    "slug": "year12-c4",
+    "subject": "Mathematics Advanced",
+    "number": "C4",
+    "title": "Integral Calculus",
+    "year": "Year 12",
+    "dotPoints": 25,
+    "status": "not-started"
+  },
+  {
+    "slug": "year12-m1",
+    "subject": "Mathematics Advanced",
+    "number": "M1",
+    "title": "Modelling Financial Situations",
+    "year": "Year 12",
+    "dotPoints": 16,
+    "status": "not-started"
+  },
+  {
+    "slug": "year12-s2",
+    "subject": "Mathematics Advanced",
+    "number": "S2",
+    "title": "Descriptive Statistics and Bivariate Data Analysis",
+    "year": "Year 12",
+    "dotPoints": 18,
+    "status": "not-started"
+  },
+  {
+    "slug": "year12-s3",
+    "subject": "Mathematics Advanced",
+    "number": "S3",
+    "title": "Random Variables",
+    "year": "Year 12",
+    "dotPoints": 17,
+    "status": "not-started"
+  }
+]

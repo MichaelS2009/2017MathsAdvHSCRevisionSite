@@ -1,0 +1,21 @@
+{
+  "slug": "year11-e1",
+  "subject": "Mathematics Advanced",
+  "number": "E1",
+  "title": "Logarithms and Exponentials",
+  "year": "Year 11",
+  "dotPoints": 20,
+  "status": "not-started",
+  "coreIdeas": [
+    {
+      "text": "Populate this module from the NSW syllabus before revision. Keep each point compact and exam-focused.",
+      "star": true
+    }
+  ],
+  "formulas": [],
+  "diagrams": [],
+  "practicals": [],
+  "traps": [],
+  "knowButDontWrite": [],
+  "syllabusPoints": []
+}

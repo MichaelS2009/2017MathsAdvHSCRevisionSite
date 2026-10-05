@@ -1,0 +1,21 @@
+{
+  "slug": "year11-c1",
+  "subject": "Mathematics Advanced",
+  "number": "C1",
+  "title": "Introduction to Differentiation",
+  "year": "Year 11",
+  "dotPoints": 22,
+  "status": "not-started",
+  "coreIdeas": [
+    {
+      "text": "Populate this module from the NSW syllabus before revision. Keep each point compact and exam-focused.",
+      "star": true
+    }
+  ],
+  "formulas": [],
+  "diagrams": [],
+  "practicals": [],
+  "traps": [],
+  "knowButDontWrite": [],
+  "syllabusPoints": []
+}
